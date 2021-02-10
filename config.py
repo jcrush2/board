@@ -4,10 +4,10 @@ gods = [55910350]
 
 # Бот в текущей сборке расчитан на работу с heroku.com
 # Это ссылка на приложение, для установления вебхука
-url = "https://khabarabot.herokuapp.com/bot"
+url = "https://khabarovskiybot.herokuapp.com/bot"
 
 # Имя бота (то, которое @Karmator_bot)
-bot_name = "khabara_bot"
+bot_name = "khabarovskiybot"
 
 # Ссылка на Github репозиторий этого бота
 adminschat = "@jcrush, @Odmin_khv, @it_was_a_trap, @kroukys_Oo"
