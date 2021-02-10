@@ -1,4 +1,2 @@
 flask
-peewee
-psycopg2
 pytelegrambotapi
