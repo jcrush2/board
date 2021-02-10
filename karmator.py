@@ -9,11 +9,9 @@ import json
 import re
 
 from flask import Flask, request
-import peewee as pw
+
 import telebot
 
-from database import KarmaUser, Limitation
-from logger import main_log
 from telebot import types
 import config
 
