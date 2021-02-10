@@ -217,7 +217,7 @@ def reply_exist(msg):
 
 @bot.message_handler(content_types=["text"], func=reply_exist)
 def changing_karma_text(msg):
-
+	bot.delete_message(msg.chat.id, msg.message_id)
 	commands(msg, msg.text)
 	
 
