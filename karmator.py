@@ -15,7 +15,7 @@ import telebot
 from telebot import types
 import config
 
-main_log.info("Program starting")
+
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
@@ -43,7 +43,7 @@ def start(msg):
 	Функция для ответа на сообщение-команду для приветствия пользователя.
 	:param msg: Объект сообщения-команды
 	"""
-	main_log.info("Starting func 'start'")
+
 
 	reply_text = (
 			"Здравствуйте, я бот, который отвечает за " +
@@ -57,7 +57,7 @@ def helps(msg):
 	Функция для отправки списка общедоступных команд для бота
 	:param msg: Объект сообщения-команды
 	"""
-	main_log.info("Starting func 'help'")
+
 
 	bot.send_chat_action(msg.chat.id, "typing")
 
@@ -88,7 +88,7 @@ def weather(msg):
 	в котором хранится исходный код бота
 	:param msg: Объект сообщения-команды
 	"""
-	main_log.info("Starting func 'source'")
+
 	bot.send_chat_action(msg.chat.id, "typing")
 	reply_text = "<a href=\"https://t.me/iv?url=https://khabara.ru/weather.php&rhash=c036525856601d\">погода</a>"
 	bot.reply_to(msg, reply_text, parse_mode="HTML")
@@ -107,7 +107,7 @@ def nos(msg):
 	"""
 	Функция, для маркета
 	"""
-	main_log.info("Starting func 'nos'") 
+
 	nos_text = "ℹ️ Здесь Чат общения, для объявлений воспользуйтесь группами: @market27 или @khvjob"
 	user = bot.get_chat_member(msg.chat.id, msg.from_user.id)
 	if msg.reply_to_message:
@@ -129,7 +129,7 @@ def select_user(user, chat):
 
 	TODO Хотелось бы избавиться от этой функции
 	"""
-	main_log.info(f"Select user with id:{user.id} and chat:{chat.id}")
+
 
 	selected_user = KarmaUser.select().where(
 		(KarmaUser.userid == user.id) &
@@ -152,9 +152,7 @@ def insert_user(user, chat):
 	user_name = (user.first_name or "") + " " + (user.last_name or "")
 	user_nick = user.username or ""
 
-	main_log.info(f"Inserting new user with name: {user_name} and "
-				f"id:{user.id}, and in chat:{chat.title or ''} and "
-				f"id:{chat.id}")
+
 
 	new_user = KarmaUser.create(
 				userid=user.id,
@@ -187,9 +185,7 @@ def change_karma(user, chat, result):
 	user_name = (user.first_name or "") + " " + (user.last_name or "")
 	user_nick = user.username or ""
 
-	main_log.info(f"Updating karma for user with name: {user_name} and " +
-				f"id:{user.id}, and in chat:{chat.title or ''} and " +
-				f"id:{chat.id}. Karma changed at result")
+
 
 	update_user = KarmaUser.update(
 							karma=(KarmaUser.karma + result),
@@ -209,7 +205,7 @@ def my_karma(msg):
 	:param msg: Объект сообщения-команды
 	"""
 	
-	main_log.info("Start func 'my_karma'")
+
 	user = select_user(msg.from_user, msg.chat)
 	if not user:
 		insert_user(msg.from_user, msg.chat)
@@ -221,7 +217,7 @@ def my_karma(msg):
 	else:
 		name = user.user_nick.strip()
 
-	main_log.info(f"User {name} check his karma ({user.karma})")
+
 	user_rang = "🤖 Бот"
 	if user.karma <= 9: user_rang = "🤖\n      <code>Бот</code>"
 	if 10 <= user.karma < 20: user_rang = "🤫\n      <code>Тихоня</code>"
@@ -267,7 +263,7 @@ def top_best(msg):
 	Функция которая выводит список пользователей с найбольшим значением кармы
 	:param msg: Объект сообщения-команды
 	"""
-	main_log.info("Starting func 'top_best'")
+
 
 	if len(msg.text.split()) == 1:
 		result=10
@@ -380,9 +376,9 @@ def krasavchik(msg):
 	"""
 	Функция которая красавчика дня
 	"""
-	main_log.info("Starting func 'krasavchik'")
+
 	bot.send_message(msg.chat.id, "Крутим барабан <b>ХабЧата</b>...", parse_mode="HTML")
-	main_log.info("Starting func 'krasavchik'")
+
 	bot.send_chat_action(msg.chat.id, "typing")
 	selected_user = KarmaUser.select()\
 		.where((KarmaUser.karma > 10) & (KarmaUser.chatid == msg.chat.id))\
@@ -666,7 +662,7 @@ def is_karma_abuse(msg):
 			
 def commands(msg, text):
 	
-	main_log.info("Starting func 'commands'")
+
 
 	if 'бот ' in msg.text.lower() or ' бот' in msg.text.lower() or 'скуч' in msg.text.lower():
 		bot.send_chat_action(msg.chat.id, "typing")
