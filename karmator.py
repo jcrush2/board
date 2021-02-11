@@ -42,7 +42,7 @@ def start(msg):
 
 def commands_foto(msg):
 	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-id{msg.from_user.first_name}-comm.html")
+	url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-id-comm.html")
 	keyboard.add(url_button)
 	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a></b> размещено.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по указанным контактам.\n\n<i>Оставить отзыв о продавце можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 			
