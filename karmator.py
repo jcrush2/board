@@ -48,7 +48,8 @@ def start(msg):
 
 			
 def commands(msg, text):
-	
+	if len(text) == 1:
+		bot.delete_message(msg.chat.id, msg.message_id)
 
 
 	if 'бот ' in msg.text.lower() or ' бот' in msg.text.lower() or 'скуч' in msg.text.lower():
@@ -197,6 +198,7 @@ def commands(msg, text):
 
 	if re.search(r'[а-яА-ЯёЁ]',msg.text.split()[0].lower()) and re.search(r'[A-Za-z]',msg.text.split()[0].lower()):
 		bot.reply_to(msg,f"Попытался обойти систему 🗿", parse_mode="HTML")
+		
 	if msg.text.lower() == seves:
 		if seves_id ==  f"{msg.from_user.id}":
 					bot.send_chat_action(msg.chat.id, "typing")
