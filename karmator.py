@@ -51,10 +51,10 @@ def commands(msg, text):
 
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		if re.search(r'^(.*@[a-zA-Z0-9])|((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,10}',msg.text.lower())== None:
-			bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
-			bot.delete_message(msg.chat.id, msg.message_id)
+#	else:
+#		if re.search(r'^(.*@[a-zA-Z0-9])|((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,10}',msg.text.lower())== None:
+#			bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
+#			bot.delete_message(msg.chat.id, msg.message_id)
 def reply_exist(msg):
 	return msg.reply_to_message
 
