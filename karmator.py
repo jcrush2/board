@@ -53,10 +53,10 @@ def commands(msg, text):
 	else:
 
 		keyboard = types.InlineKeyboardMarkup()
-		url_button = types.InlineKeyboardButton(text="Посмотреть", url="https://www.aviasales.ru/search/KHV")
-		url_button2 = types.InlineKeyboardButton(text="Посмотреть22", url="https://www.aviasales.ru/search/KHV")
+		url_button = types.InlineKeyboardButton(text="Написать", url="tg://user?id="+msg.from_user.id)
+		url_button2 = types.InlineKeyboardButton(text="Оставить отзыв", url="https://www.aviasales.ru/search/KHV")
 		keyboard.add(url_button,url_button2)
-		bot.send_message(msg.chat.id, "Вы можете купить билет, оплатив по кнопке ниже.", reply_markup=keyboard)
+		bot.send_message(msg.chat.id, f'🐊 {msg.from_user.first_name} разместил объявление.', reply_markup=keyboard)
 
 	if re.search(r'[а-яА-ЯёЁ]',msg.text.split()[0].lower()) and re.search(r'[A-Za-z]',msg.text.split()[0].lower()):
 		bot.reply_to(msg,f"Попытался обойти систему 🗿", parse_mode="HTML")
