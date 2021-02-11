@@ -1,30 +1,16 @@
 #!usr/bin/python3
 import hashlib
-import string
 import os
 
 from flask import Flask, request
 
 import telebot
-from logger import main_log
-from telebot import types
-import config
 
-main_log.info("Program starting")
+from telebot import types
+
+
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
-
-def is_my_message(msg):
-	"""
-	Функция для проверки, какому боту отправлено сообщение.
-	Для того, чтобы не реагировать на команды для других ботов.
-	:param msg: Объект сообщения, для которого проводится проверка.
-	"""
-	text = msg.text.split()[0].split("@")
-	if len(text) > 1:
-		if text[1] != config.bot_name:
-			return False
-	return True
 
 
 @bot.message_handler(commands=["start"], func=is_my_message)
@@ -47,11 +33,11 @@ def commands_foto(msg):
 	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a> размещено.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личку</a>, или по указанным контактам.\n\n<i>Оставить отзыв о нём можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 			
 def commands(msg, text):
-	main_log.info("Starting func 'commands'")
+
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		commands_foto(msg)
+#	else:
+#		commands_foto(msg)
 
 
 def reply_exist(msg):
@@ -68,20 +54,6 @@ def changing_karma_text(msg):
 	
 
 	
-
-
-@bot.message_handler(content_types=['photo'])	
-def karma_game(msg):
-	if len(msg.message.attachments) > 1:
-		return
-	else:
-		commands_foto(msg)
-	
-@bot.message_handler(content_types=['video'])	
-def karma_game(msg):
-	commands_foto(msg)
-
-
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
 
