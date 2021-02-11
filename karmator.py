@@ -55,7 +55,7 @@ def commands(msg, text):
 		keyboard = types.InlineKeyboardMarkup()
 		url_button = types.InlineKeyboardButton(text="Оставить отзыв", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
 		keyboard.add(url_button)
-		bot.send_message(msg.chat.id, f'🐊 {msg.from_user.first_name} разместил объявление.\n Чтобы откликнуться, непишите в <a href="tg://user?id={msg.from_user.id}">личу</a>/n Вы также можете оставить отзыв о продавце по кнопке ниже.', reply_markup=keyboard)
+		bot.send_message(msg.chat.id, f'🐊 <b>{msg.from_user.first_name}</b> разместил объявление.\n Чтобы откликнуться, непишите в <a href="tg://user?id={msg.from_user.id}">личу</a>/n Вы также можете оставить отзыв о продавце по кнопке ниже.', parse_mode="HTML", reply_markup=keyboard)
 
 	if re.search(r'[а-яА-ЯёЁ]',msg.text.split()[0].lower()) and re.search(r'[A-Za-z]',msg.text.split()[0].lower()):
 		bot.reply_to(msg,f"Попытался обойти систему 🗿", parse_mode="HTML")
