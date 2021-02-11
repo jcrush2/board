@@ -10,7 +10,7 @@ import telebot
 from telebot import types
 import config
 
-main_log.info("Program starting")
+
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
