@@ -55,7 +55,8 @@ def commands(msg, text):
 	else:
 		try:
 			photo_id = msg.message.photo[-1].file_id
-			commands_foto(msg)
+			if msg.caption ==5:
+				commands_foto(msg)
 		except:
 			commands_foto(msg)
 
