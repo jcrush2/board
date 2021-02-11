@@ -11,11 +11,11 @@ import re
 from flask import Flask, request
 
 import telebot
-
+from logger import main_log
 from telebot import types
 import config
 
-
+main_log.info("Program starting")
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
@@ -48,6 +48,7 @@ def start(msg):
 
 			
 def commands(msg, text):
+	main_log.info("Starting func 'commands'")
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
