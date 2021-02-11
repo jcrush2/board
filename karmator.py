@@ -53,7 +53,7 @@ def commands(msg, text):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		keyboard = types.InlineKeyboardMarkup()
-		url_button = types.InlineKeyboardButton(text="Написать", url=f"tg://user?id={msg.from_user.id}")
+		url_button = types.InlineKeyboardButton(text="Написать", url="tg://user?id=55910350")
 		url_button2 = types.InlineKeyboardButton(text="Оставить отзыв", url="https://www.aviasales.ru/search/KHV")
 		keyboard.add(url_button,url_button2)
 		bot.send_message(msg.chat.id, f'🐊 {msg.from_user.first_name} разместил объявление.', reply_markup=keyboard)
