@@ -55,7 +55,7 @@ def commands(msg, text):
 		keyboard = types.InlineKeyboardMarkup()
 		url_button = types.InlineKeyboardButton(text="Оставить отзыв💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
 		keyboard.add(url_button)
-		bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n Чтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.<br><br>Оставить отзыв о продавце можно по кнопке ниже.', parse_mode="HTML", reply_markup=keyboard)
+		bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nℹ Чтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\nОставить отзыв о продавце можно по кнопке ниже.', parse_mode="HTML", reply_markup=keyboard)
 
 
 def reply_exist(msg):
