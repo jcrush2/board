@@ -43,9 +43,9 @@ def start(msg):
 def commands_foto(msg):
 	
 	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text=f"Отзывы о {msg.from_user.first_name}💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
+	url_button = types.InlineKeyboardButton(text=f"Отзывы - {msg.from_user.first_name}💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
 	keyboard.add(url_button)
-	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a> размещено.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личку</a>, или по указанным контактам.\n\n<code>Оставить отзыв о продавце можно по кнопке ниже.</code>', parse_mode="HTML", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a> размещено.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личку</a>, или по указанным контактам.\n\n<i>Оставить отзыв о нём можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 			
 def commands(msg, text):
 	main_log.info("Starting func 'commands'")
