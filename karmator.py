@@ -8,10 +8,23 @@ from flask import Flask, request
 import telebot
 from logger import main_log
 from telebot import types
+import config
 
 main_log.info("Program starting")
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
+
+def is_my_message(msg):
+	"""
+	Функция для проверки, какому боту отправлено сообщение.
+	Для того, чтобы не реагировать на команды для других ботов.
+	:param msg: Объект сообщения, для которого проводится проверка.
+	"""
+	text = msg.text.split()[0].split("@")
+	if len(text) > 1:
+		if text[1] != config.bot_name:
+			return False
+	return True
 
 
 @bot.message_handler(commands=["start"], func=is_my_message)
