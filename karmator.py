@@ -2,6 +2,7 @@
 import hashlib
 import string
 import os
+import re
 
 from flask import Flask, request
 
@@ -50,6 +51,9 @@ def commands(msg, text):
 
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
+	if re.search(r'^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,10}$',msg.text.lower()) != None:
+		bot.send_message(msg.chat.id, "доска обьявлений")
+#		bot.delete_message(msg.chat.id, msg.message_id)
 #	else:
 #		commands_foto(msg)
 
