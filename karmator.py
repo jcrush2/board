@@ -53,9 +53,9 @@ def commands(msg, text):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		keyboard = types.InlineKeyboardMarkup()
-		url_button = types.InlineKeyboardButton(text="Оставить отзыв💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
+		url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
 		keyboard.add(url_button)
-		bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nℹ Чтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\nОставить отзыв о продавце можно по кнопке ниже.', parse_mode="HTML", reply_markup=keyboard)
+		bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\n<i>Оставить отзыв о продавце можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 
 
 def reply_exist(msg):
@@ -76,7 +76,10 @@ def changing_karma_text(msg):
 
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
-	commands(msg, msg.text)
+	keyboard = types.InlineKeyboardMarkup()
+	url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
+	keyboard.add(url_button)
+	bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\n<i>Оставить отзыв о продавце можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 	
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
