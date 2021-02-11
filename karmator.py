@@ -53,25 +53,9 @@ def commands(msg, text):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		keyboard = types.InlineKeyboardMarkup()
-		url_button = types.InlineKeyboardButton(text="Оставить отзыв", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
+		url_button = types.InlineKeyboardButton(text="Оставить отзыв💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
 		keyboard.add(url_button)
-		bot.send_message(msg.chat.id, f'🐊 <b>{msg.from_user.first_name}</b> разместил объявление.\n Чтобы откликнуться, непишите в <a href="tg://user?id={msg.from_user.id}">личу</a>/n Вы также можете оставить отзыв о продавце по кнопке ниже.', parse_mode="HTML", reply_markup=keyboard)
-
-	if re.search(r'[а-яА-ЯёЁ]',msg.text.split()[0].lower()) and re.search(r'[A-Za-z]',msg.text.split()[0].lower()):
-		bot.reply_to(msg,f"Попытался обойти систему 🗿", parse_mode="HTML")
-		
-	if msg.text.lower() == seves:
-		if seves_id ==  f"{msg.from_user.id}":
-					bot.send_chat_action(msg.chat.id, "typing")
-					bot.reply_to(msg,f"Мухлевать не красиво: -10 кармы 💩", parse_mode="HTML")
-					change_karma(msg.from_user, msg.chat, -10)
-					
-		else:
-			bot.send_chat_action(msg.chat.id, "typing")
-			bot.reply_to(msg,f"🎉 Правильный ответ: <b>{seves}</b> +3 кармы, запустить игру /croco", parse_mode="HTML")
-			change_karma(msg.from_user, msg.chat, 3)
-			saves_database[database] = "dse4f"
-
+		bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n Чтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.<br><br>Оставить отзыв о продавце можно по кнопке ниже.', parse_mode="HTML", reply_markup=keyboard)
 
 
 def reply_exist(msg):
