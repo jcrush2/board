@@ -1,12 +1,7 @@
 #!usr/bin/python3
-import datetime
 import hashlib
 import string
 import os
-import random
-import requests
-import json
-import re
 
 from flask import Flask, request
 
@@ -45,17 +40,18 @@ def start(msg):
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
 
-
+def commands_foto(msg):
+	keyboard = types.InlineKeyboardMarkup()
+	url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
+	keyboard.add(url_button)
+	bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\n<i>Оставить отзыв о продавце можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 			
 def commands(msg, text):
 	main_log.info("Starting func 'commands'")
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		keyboard = types.InlineKeyboardMarkup()
-		url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
-		keyboard.add(url_button)
-		bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\n<i>Оставить отзыв о продавце можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
+		commands_foto(msg)
 
 
 def reply_exist(msg):
@@ -76,11 +72,12 @@ def changing_karma_text(msg):
 
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
-	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
-	keyboard.add(url_button)
-	bot.send_message(msg.chat.id, f'ℹ️ <b>{msg.from_user.first_name}</b> разместил объявление.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личу</a>, или по его контактам.\n\n<i>Оставить отзыв о продавце можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
+	commands_foto(msg)
 	
+@bot.message_handler(content_types=['video'])	
+def karma_game(msg):
+	commands_foto(msg)
+
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
 
