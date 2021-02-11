@@ -50,8 +50,8 @@ def commands(msg, text):
 	main_log.info("Starting func 'commands'")
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
-#	else:
-#		commands_foto(msg)
+	else:
+		commands_foto(msg)
 
 
 def reply_exist(msg):
@@ -67,14 +67,12 @@ def changing_karma_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 
-	
+
+
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
 
 	commands(msg, msg.text)
-
-				
-				
 
 
 
