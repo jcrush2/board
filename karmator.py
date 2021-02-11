@@ -53,10 +53,9 @@ def commands(msg, text):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		keyboard = types.InlineKeyboardMarkup()
-		url_button = types.InlineKeyboardButton(text="Написать", url="tg://user?id=55910350")
-		url_button2 = types.InlineKeyboardButton(text="Оставить отзыв", url="https://www.aviasales.ru/search/KHV")
-		keyboard.add(url_button,url_button2)
-		bot.send_message(msg.chat.id, f'🐊 {msg.from_user.first_name} разместил объявление.', reply_markup=keyboard)
+		url_button = types.InlineKeyboardButton(text="Оставить отзыв", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
+		keyboard.add(url_button)
+		bot.send_message(msg.chat.id, f'🐊 {msg.from_user.first_name} разместил объявление.\n Чтобы откликнуться, непишите в <a href="tg://user?id={msg.from_user.id}">личу</a>/n Вы также можете оставить отзыв о продавце по кнопке ниже.', reply_markup=keyboard)
 
 	if re.search(r'[а-яА-ЯёЁ]',msg.text.split()[0].lower()) and re.search(r'[A-Za-z]',msg.text.split()[0].lower()):
 		bot.reply_to(msg,f"Попытался обойти систему 🗿", parse_mode="HTML")
@@ -82,9 +81,18 @@ def reply_exist(msg):
 @bot.message_handler(content_types=["text"], func=reply_exist)
 def changing_karma_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
-	commands(msg, msg.text)
+	
+@bot.message_handler(content_types=["photo"], func=reply_exist)
+def changing_karma_text(msg):
+	bot.delete_message(msg.chat.id, msg.message_id)
 	
 
+	
+
+
+@bot.message_handler(content_types=['photo'])	
+def karma_game(msg):
+	commands(msg, msg.text)
 	
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
