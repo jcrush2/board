@@ -41,7 +41,7 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 
 def commands_foto(msg):
-	urlkhabara=f"https://khabara.ru/app/{msg.from_user.id}-id{msg.from_user.first_name}-comm.html"
+	urlkhabara==f"https://khabara.ru/app/{msg.from_user.id}-id{msg.from_user.first_name}-comm.html"
 	keyboard = types.InlineKeyboardMarkup()
 	url_button = types.InlineKeyboardButton(text="Отзывы 💬", url=urlkhabara)
 	keyboard.add(url_button)
