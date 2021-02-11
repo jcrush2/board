@@ -1,14 +1,15 @@
 #!usr/bin/python3
 import hashlib
+import string
 import os
 
 from flask import Flask, request
 
 import telebot
-
+from logger import main_log
 from telebot import types
 
-
+main_log.info("Program starting")
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
@@ -33,7 +34,7 @@ def commands_foto(msg):
 	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a> размещено.\n\nЧтобы откликнуться, непишите ему в <a href="tg://user?id={msg.from_user.id}">📩 личку</a>, или по указанным контактам.\n\n<i>Оставить отзыв о нём можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 			
 def commands(msg, text):
-
+	main_log.info("Starting func 'commands'")
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 #	else:
