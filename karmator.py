@@ -72,7 +72,7 @@ def changing_karma_text(msg):
 
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
-	if len(msg.attachments) > 1:
+	if len(msg.message.attachments) > 1:
 		return
 	else:
 		commands_foto(msg)
