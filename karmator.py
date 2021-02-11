@@ -40,7 +40,7 @@ def start(msg):
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
 
-def commands_foto(msg):
+def commands_foto:
 	
 	keyboard = types.InlineKeyboardMarkup()
 	url_button = types.InlineKeyboardButton(text=f"Отзывы - {msg.from_user.first_name}💬", url=f"https://khabara.ru/app/{msg.from_user.id}-comm.html")
@@ -52,7 +52,7 @@ def commands(msg, text):
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		commands_foto(msg)
+		commands_foto
 
 
 def reply_exist(msg):
@@ -72,12 +72,12 @@ def changing_karma_text(msg):
 
 
 @bot.message_handler(content_types=['photo'])	
-def karma_game(msg):
-	commands_foto(msg)
+def karma_game:
+	commands_foto
 	
 @bot.message_handler(content_types=['video'])	
 def karma_game(msg):
-	commands_foto(msg)
+	commands_foto
 
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
