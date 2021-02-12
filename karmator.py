@@ -65,6 +65,8 @@ def commands_media(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	if re.search('\d+', msg.caption.lower()) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
 
 def reply_exist(msg):
 	return msg.reply_to_message
@@ -78,7 +80,9 @@ def changing_karma_text(msg):
 def changing_karma_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
-
+@bot.message_handler(content_types=["video"], func=reply_exist)
+def changing_karma_text(msg):
+	bot.delete_message(msg.chat.id, msg.message_id)
 
 
 @bot.message_handler(content_types=['text'])	
@@ -92,13 +96,8 @@ def karma_game(msg):
 		
 @bot.message_handler(content_types=['video'])	
 def karma_game(msg):
-	
-	if msg.video[0].file_id is not None:
-		bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
-		commands_media(msg)
+	commands_media(msg)
 		
-
-
 
 # Дальнейший код используется для установки и удаления вебхуков
 server = Flask(__name__)
