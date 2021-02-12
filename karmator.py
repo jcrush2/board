@@ -57,6 +57,14 @@ def commands(msg, text):
 #		if re.search(r'^(.*@[a-zA-Z0-9])|((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,10}',msg.text.lower())== None:
 #			bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
 
+def commands_media(msg):
+	if msg.caption is None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	if len(msg.caption) < 4:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	if re.search('\d+', msg.text.lower()) == None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+
 def reply_exist(msg):
 	return msg.reply_to_message
 
@@ -79,10 +87,11 @@ def karma_game(msg):
 	
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
-	if msg.caption is None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	if len(msg.caption) < 4:
-		bot.delete_message(msg.chat.id, msg.message_id)
+	commands_media(msg)
+		
+@bot.message_handler(content_types=['video'])	
+def karma_game(msg):
+	commands_media(msg)
 
 
 
