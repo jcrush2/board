@@ -52,7 +52,9 @@ def commands(msg, text):
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	if re.search('\d+', msg.text.lower()) == None:
-			bot.delete_message(msg.chat.id, msg.message_id)
+		bot.delete_message(msg.chat.id, msg.message_id)
+	if 'http' in msg.text.lower() or 't.me' in msg.text.lower():
+		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		commands_foto(msg)
 #		if re.search(r'^(.*@[a-zA-Z0-9])|((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,10}',msg.text.lower())== None:
@@ -62,6 +64,10 @@ def commands_media(msg):
 
 	if msg.caption is None:
 		bot.delete_message(msg.chat.id, msg.message_id)
+		
+	if 'http' in msg.caption.lower() or 't.me' in msg.caption.lower():
+		bot.delete_message(msg.chat.id, msg.message_id)
+
 	if len(msg.caption) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	if re.search('\d+', msg.caption.lower()) == None:
@@ -83,10 +89,7 @@ def changing_karma_text(msg):
 	
 @bot.message_handler(content_types=["video"], func=reply_exist)
 def changing_karma_text(msg):
-	if forward_from != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		bot.delete_message(msg.chat.id, msg.message_id)
+	bot.delete_message(msg.chat.id, msg.message_id)
 
 
 @bot.message_handler(content_types=['text'])	
