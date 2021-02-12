@@ -62,7 +62,7 @@ def commands_media(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	if len(msg.caption) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
-	if re.search('\d+', msg.text.lower()) == None:
+	if re.search('\d+', msg.caption.lower()) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 
 def reply_exist(msg):
