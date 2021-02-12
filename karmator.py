@@ -48,6 +48,7 @@ def commands_foto(msg):
 	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a> размещено.\n\nЧтобы откликнуться, пишите автору в <a href="tg://user?id={msg.from_user.id}">📩 личку</a>, или по указанным контактам.\n\n<i>Оставить отзыв можно по кнопке ниже.</i>', parse_mode="HTML", reply_markup=keyboard)
 			
 def commands(msg, text):
+
 	if len(text) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	if re.search('\d+', msg.text.lower()) == None:
@@ -58,6 +59,7 @@ def commands(msg, text):
 #			bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
 
 def commands_media(msg):
+
 	if msg.caption is None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	if len(msg.caption) < 4:
@@ -86,24 +88,16 @@ def changing_karma_text(msg):
 
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
-	if forward_from != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		commands(msg, msg.text)
+
+	commands(msg, msg.text)
 	
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
-	if forward_from != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		commands_media(msg)
+	commands_media(msg)
 		
 @bot.message_handler(content_types=['video'])	
 def karma_game(msg):
-	if forward_from != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		commands_media(msg)
+	commands_media(msg)
 		
 
 # Дальнейший код используется для установки и удаления вебхуков
