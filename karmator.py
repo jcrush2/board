@@ -76,6 +76,11 @@ def changing_karma_text(msg):
 def karma_game(msg):
 
 	commands(msg, msg.text)
+	
+@bot.message_handler(content_types=['photo'])	
+def karma_game(msg):
+	if len(msg.caption) < 4:
+		bot.delete_message(msg.chat.id, msg.message_id)
 
 
 
