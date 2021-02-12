@@ -83,7 +83,10 @@ def changing_karma_text(msg):
 	
 @bot.message_handler(content_types=["video"], func=reply_exist)
 def changing_karma_text(msg):
-	bot.delete_message(msg.chat.id, msg.message_id)
+	if forward_from != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		bot.delete_message(msg.chat.id, msg.message_id)
 
 
 @bot.message_handler(content_types=['text'])	
