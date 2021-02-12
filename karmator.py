@@ -93,7 +93,7 @@ def karma_game(msg):
 @bot.message_handler(content_types=['video'])	
 def karma_game(msg):
 	commands_media(msg)
-	if msg.photo[0].file_id:
+	if msg.video[0].file_id:
 		bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
 		
 
