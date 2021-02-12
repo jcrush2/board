@@ -58,13 +58,13 @@ def commands(msg, text):
 #			bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
 
 def commands_media(msg):
-	if msg.photo[0].file_id:
-		if msg.caption is None:
-			bot.delete_message(msg.chat.id, msg.message_id)
-		if len(msg.caption) < 4:
-			bot.delete_message(msg.chat.id, msg.message_id)
-		if re.search('\d+', msg.caption.lower()) == None:
-			bot.delete_message(msg.chat.id, msg.message_id)
+
+	if msg.caption is None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	if len(msg.caption) < 4:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	if re.search('\d+', msg.caption.lower()) == None:
+		bot.delete_message(msg.chat.id, msg.message_id)
 
 def reply_exist(msg):
 	return msg.reply_to_message
