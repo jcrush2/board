@@ -85,8 +85,7 @@ def karma_game(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		commands_media(msg)
-		
+		commands(msg, msg.text)
 	
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
