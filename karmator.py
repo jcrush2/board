@@ -49,11 +49,7 @@ def commands_foto(msg):
 			
 def commands(msg, text):
 
-	if len(text) < 4:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	if re.search('\d+', msg.text.lower()) == None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	if 'http' in msg.text.lower() or 't.me' in msg.text.lower():
+	if len(text) < 4 or re.search('\d+', msg.text.lower()) == None or 'http' in msg.text.lower() or 't.me' in msg.text.lower():
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		commands_foto(msg)
@@ -62,15 +58,7 @@ def commands(msg, text):
 
 def commands_media(msg):
 
-	if msg.caption is None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-		
-	if 'http' in msg.caption.lower() or 't.me' in msg.caption.lower():
-		bot.delete_message(msg.chat.id, msg.message_id)
-
-	if len(msg.caption) < 4:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	if re.search('\d+', msg.caption.lower()) == None:
+	if msg.caption is None or 'http' in msg.caption.lower() or 't.me' in msg.caption.lower() or len(msg.caption) < 4 or re.search('\d+', msg.caption.lower()) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		commands_foto(msg)
