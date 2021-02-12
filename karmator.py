@@ -82,12 +82,19 @@ def changing_karma_text(msg):
 
 @bot.message_handler(content_types=['text'])	
 def karma_game(msg):
-
-	commands(msg, msg.text)
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		commands_media(msg)
+		
 	
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
-	commands_media(msg)
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		commands_media(msg)
+		
 		
 @bot.message_handler(content_types=['video'])	
 def karma_game(msg):
