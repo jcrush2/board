@@ -91,7 +91,10 @@ def karma_game(msg):
 		
 @bot.message_handler(content_types=['video'])	
 def karma_game(msg):
-	commands_media(msg)
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		commands_media(msg)
 		
 
 # Дальнейший код используется для установки и удаления вебхуков
