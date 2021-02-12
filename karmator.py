@@ -79,6 +79,8 @@ def karma_game(msg):
 	
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
+	if msg.caption is None:
+		bot.delete_message(msg.chat.id, msg.message_id)
 	if len(msg.caption) < 4:
 		bot.delete_message(msg.chat.id, msg.message_id)
 
