@@ -46,7 +46,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 
-	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None:
+	if textspam is None or len(textspam) < 4 or not textspam.isdigit():
 		bot.delete_message(msg.chat.id, msg.message_id)
 		
 	keywords = ("zwzff", "wa.me", "www", "http", "t.me", "www")
