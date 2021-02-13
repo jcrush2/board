@@ -63,18 +63,9 @@ def antispam_media(msg):
 def reply_exist(msg):
 	return msg.reply_to_message
 
-@bot.message_handler(content_types=["text"], func=reply_exist)
+@bot.message_handler(content_types=["text", "photo","video"], func=reply_exist)
 def reply_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
-	
-@bot.message_handler(content_types=["photo"], func=reply_exist)
-def reply_photo(msg):
-	bot.delete_message(msg.chat.id, msg.message_id)
-	
-@bot.message_handler(content_types=["video"], func=reply_exist)
-def reply_video(msg):
-	bot.delete_message(msg.chat.id, msg.message_id)
-
 
 @bot.message_handler(content_types=['text'])	
 def antispam_text(msg):
@@ -83,14 +74,10 @@ def antispam_text(msg):
 	else:
 		antispam(msg)
 	
-@bot.message_handler(content_types=['photo'])	
+@bot.message_handler(content_types=['photo','video'])	
 def antispam_photo(msg):
 	antispam_media(msg)
 		
-		
-@bot.message_handler(content_types=['video'])	
-def antispam_video(msg):
-	antispam_media(msg)
 		
 
 # Дальнейший код используется для установки и удаления вебхуков
