@@ -76,7 +76,7 @@ def antispam(msg):
 	else:
 		for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
 			if entity.type in ["url", "text_link"]: 
-			bot.delete_message(msg.chat.id, msg.message_id)
+				bot.delete_message(msg.chat.id, msg.message_id)
 			else:
 				otzyv(msg)
 
