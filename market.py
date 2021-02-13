@@ -14,6 +14,49 @@ import config
 
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
+
+def is_my_message(msg):
+	"""
+	Функция для проверки, какому боту отправлено сообщение.
+	Для того, чтобы не реагировать на команды для других ботов.
+	:param msg: Объект сообщения, для которого проводится проверка.
+	"""
+	text = msg.text.split()[0].split("@")
+	if len(text) > 1:
+		if text[1] != config.bot_name:
+			return False
+	return True
+
+
+@bot.message_handler(commands=["start"], func=is_my_message)
+def start(msg):
+	"""
+	Функция для ответа на сообщение-команду для приветствия пользователя.
+	:param msg: Объект сообщения-команды
+	"""
+
+
+	reply_text = (
+			"Здравствуйте, я бот, который отвечает за " +
+			" подсчет кармы в чате @khvchat.")
+	bot.send_message(msg.chat.id, reply_text)
+	
+	
+#@bot.message_handler(func=lambda msg: msg.entities is not None)
+#def delete_links(msg):
+#	for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+#		if entity.type in ["url", "text_link"]: 
+#			bot.delete_message(msg.chat.id, msg.message_id)
+#		else:
+#			return
+			
+#@bot.message_handler(func=lambda msg: msg.caption_entities is not None, content_types=["photo"])
+#def delete_links(msg):
+#	for entity in msg.caption_entities:  # Пройдёмся по всем entities в поисках ссылок
+#		if entity.type in ["url", "text_link"]: 
+#			bot.delete_message(msg.chat.id, msg.message_id)
+#		else:
+#			return
 		
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
@@ -31,56 +74,63 @@ def antispam(msg):
 	if textspam is None or 'zwzff' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		otzyv(msg)
-
-def antispam_media(msg):
-	if msg.forward_from_chat != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
 		if msg.caption !=None:
 			for entity in msg.caption_entities:  # Пройдёмся по всем entities в поисках ссылок
 				if entity.type in ["url", "text_link"]: 
 					bot.delete_message(msg.chat.id, msg.message_id)
 				else:
-					antispam(msg)
+					otzyv(msg)
 		else:
-			bot.delete_message(msg.chat.id, msg.message_id)
-			
+			for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+				if entity.type in ["url", "text_link"]: 
+					bot.delete_message(msg.chat.id, msg.message_id)
+				else:
+					otzyv(msg)
+
 def reply_exist(msg):
 	return msg.reply_to_message
 
 
 @bot.message_handler(content_types=["text"], func=reply_exist)
-def reply_text(msg):
+def changing_karma_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 @bot.message_handler(content_types=["photo"], func=reply_exist)
-def reply_photo(msg):
+def changing_karma_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 @bot.message_handler(content_types=["video"], func=reply_exist)
-def reply_video(msg):
+def changing_karma_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 
 
 @bot.message_handler(content_types=['text'])	
-def antispam_text(msg):
+def karma_game(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-			if entity.type in ["url", "text_link"]: 
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				antispam(msg)
+		antispam(msg)
 	
 @bot.message_handler(content_types=['photo'])	
-def antispam_photo(msg):
-	antispam_media(msg)
+def karma_game(msg):
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		if msg.caption !=None:
+			antispam(msg)
+		else:
+			bot.delete_message(msg.chat.id, msg.message_id)
+		
 		
 @bot.message_handler(content_types=['video'])	
-def antispam_video(msg):
-	antispam_media(msg)
+def karma_game(msg):
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		if msg.caption !=None:
+			antispam(msg)
+		else:
+			bot.delete_message(msg.chat.id, msg.message_id)
 		
 
 # Дальнейший код используется для установки и удаления вебхуков
