@@ -44,13 +44,11 @@ def start(msg):
 	
 @bot.message_handler(func=lambda msg: msg.entities is not None)
 def delete_links(msg):
-    for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-        # url - обычная ссылка, text_link - ссылка, скрытая под текстом
-        if entity.type in ["url", "text_link"]: 
-            # Мы можем не проверять chat.id, он проверяется ещё в хэндлере 
-            bot.delete_message(msg.chat.id, msg.message_id)
-        else:
-            return
+	for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+		if entity.type in ["url", "text_link"]: 
+			bot.delete_message(msg.chat.id, msg.message_id)
+		else:
+			return
 
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
