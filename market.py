@@ -46,7 +46,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 
-	if textspam is None or set(['zwzff','wa.me','www','http','t.me']) & set(textspam)== None or len(textspam) < 4 or re.search('\d', textspam) == None:
+	if textspam is None or 'zwzff' in textspam or 'wa.me' in textspam or 'www' in textspam or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
