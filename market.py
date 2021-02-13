@@ -64,7 +64,7 @@ def commands_media(msg):
 		commands_foto(msg)
 		
 def antispam(msg):
-	if msg.caption !=None:
+	if msg.document.file_id !=None:
 		textspam=msg.caption.lower()
 	else:
 		textspam=msg.text.lower()
