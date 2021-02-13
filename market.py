@@ -23,17 +23,12 @@ def otzyv(msg):
 			
 		
 def antispam(msg):
-	textspam=msg.text.lower()
 	if msg.caption !=None:
 		textspam=msg.caption.lower()
-
-	if 'zwzff' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
-		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		otzyv(msg)
+		textspam=msg.text.lower()
 
-def antispam_media(msg):
-	if msg.forward_from_chat != None:
+	if textspam is None or 'zwzff' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		if msg.caption !=None:
@@ -41,7 +36,20 @@ def antispam_media(msg):
 				if entity.type in ["url", "text_link"]: 
 					bot.delete_message(msg.chat.id, msg.message_id)
 				else:
-					antispam(msg)
+					otzyv(msg)
+		else:
+			for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+				if entity.type in ["url", "text_link"]: 
+					bot.delete_message(msg.chat.id, msg.message_id)
+				else:
+					otzyv(msg)
+
+def antispam_media(msg):
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		if msg.caption !=None:
+			antispam(msg)
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 			
@@ -67,11 +75,7 @@ def antispam_text(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-			if entity.type in ["url", "text_link"]: 
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				antispam(msg)
+		antispam(msg)
 	
 @bot.message_handler(content_types=['photo'])	
 def antispam_photo(msg):
