@@ -14,32 +14,6 @@ import config
 
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
-
-def is_my_message(msg):
-	"""
-	Функция для проверки, какому боту отправлено сообщение.
-	Для того, чтобы не реагировать на команды для других ботов.
-	:param msg: Объект сообщения, для которого проводится проверка.
-	"""
-	text = msg.text.split()[0].split("@")
-	if len(text) > 1:
-		if text[1] != config.bot_name:
-			return False
-	return True
-
-
-@bot.message_handler(commands=["start"], func=is_my_message)
-def start(msg):
-	"""
-	Функция для ответа на сообщение-команду для приветствия пользователя.
-	:param msg: Объект сообщения-команды
-	"""
-
-
-	reply_text = (
-			"Здравствуйте, я бот, который отвечает за " +
-			" подсчет кармы в чате @khvchat.")
-	bot.send_message(msg.chat.id, reply_text)
 	
 	
 #@bot.message_handler(func=lambda msg: msg.entities is not None)
@@ -81,27 +55,27 @@ def reply_exist(msg):
 
 
 @bot.message_handler(content_types=["text"], func=reply_exist)
-def changing_karma_text(msg):
+def antispam_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 @bot.message_handler(content_types=["photo"], func=reply_exist)
-def changing_karma_text(msg):
+def antispam_photo(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 @bot.message_handler(content_types=["video"], func=reply_exist)
-def changing_karma_text(msg):
+def antispam_video(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 
 
 @bot.message_handler(content_types=['text'])	
-def karma_game(msg):
+def antispam_text(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		antispam(msg)
 	
 @bot.message_handler(content_types=['photo'])	
-def karma_game(msg):
+def antispam_photo(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
@@ -112,7 +86,7 @@ def karma_game(msg):
 		
 		
 @bot.message_handler(content_types=['video'])	
-def karma_game(msg):
+def antispam_video(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
