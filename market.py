@@ -50,7 +50,14 @@ def delete_links(msg):
 		else:
 			return
 			
-
+@bot.message_handler(func=lambda msg: msg.caption_entities is not None, content_types=["photo"])
+def delete_links(msg):
+	for entity in msg.caption_entities:  # Пройдёмся по всем entities в поисках ссылок
+		if entity.type in ["url", "text_link"]: 
+			bot.delete_message(msg.chat.id, msg.message_id)
+		else:
+			return
+		
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
 	url_button = types.InlineKeyboardButton(text=f"Отзывы - {msg.from_user.first_name} 💬", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html")
@@ -64,7 +71,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 
-	if textspam is None or 'wa.me' in textspam or 'www' in textspam or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
+	if textspam is None or 'wa.me' in textspam or 'www' in textspam or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
