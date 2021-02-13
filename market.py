@@ -74,7 +74,11 @@ def antispam(msg):
 	if textspam is None or 'zwzff' in textspam or 'wa.me' in textspam or 'www' in textspam or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		otzyv(msg)
+		for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+			if entity.type in ["url", "text_link"]: 
+			bot.delete_message(msg.chat.id, msg.message_id)
+			else:
+				otzyv(msg)
 
 def reply_exist(msg):
 	return msg.reply_to_message
