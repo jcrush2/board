@@ -50,26 +50,29 @@ def antispam(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
-		for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-			if entity.type in ["url", "text_link"]: 
-				bot.delete_message(msg.chat.id, msg.message_id-1)
-				bot.delete_message(msg.chat.id, msg.message_id)
 		
+def antispam_media(msg):
+	if msg.forward_from_chat != None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+	else:
+		if msg.caption !=None:
+			antispam(msg)
+		else:
+			bot.delete_message(msg.chat.id, msg.message_id)
 
 def reply_exist(msg):
 	return msg.reply_to_message
 
-
 @bot.message_handler(content_types=["text"], func=reply_exist)
-def antispam_text(msg):
+def reply_text(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 @bot.message_handler(content_types=["photo"], func=reply_exist)
-def antispam_photo(msg):
+def reply_photo(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	
 @bot.message_handler(content_types=["video"], func=reply_exist)
-def antispam_video(msg):
+def reply_video(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 
 
@@ -82,24 +85,12 @@ def antispam_text(msg):
 	
 @bot.message_handler(content_types=['photo'])	
 def antispam_photo(msg):
-	if msg.forward_from_chat != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		if msg.caption !=None:
-			antispam(msg)
-		else:
-			bot.delete_message(msg.chat.id, msg.message_id)
+	antispam_media(msg)
 		
 		
 @bot.message_handler(content_types=['video'])	
 def antispam_video(msg):
-	if msg.forward_from_chat != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		if msg.caption !=None:
-			antispam(msg)
-		else:
-			bot.delete_message(msg.chat.id, msg.message_id)
+	antispam_media(msg)
 		
 
 # Дальнейший код используется для установки и удаления вебхуков
