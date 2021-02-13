@@ -63,7 +63,7 @@ def commands_media(msg):
 	else:
 		commands_foto(msg)
 		
-def antispam(textspam):
+def antispam(msg):
 	if msg.caption !=None:
 		textspam=msg.caption.lower()
 	else:
@@ -113,7 +113,7 @@ def karma_game(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		if msg.caption !=None:
-			antispam(textspam)
+			antispam(msg)
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 		
