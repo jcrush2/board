@@ -64,6 +64,10 @@ def commands_media(msg):
 		commands_foto(msg)
 		
 def antispam(textspam):
+	if msg.caption !=None:
+		textspam=msg.caption.lower()
+	else:
+		textspam=msg.text.lower()
 
 
 	if textspam is None or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
@@ -109,7 +113,6 @@ def karma_game(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		if msg.caption !=None:
-			textspam=msg.caption.lower()
 			antispam(textspam)
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
