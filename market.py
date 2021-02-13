@@ -40,6 +40,17 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
+	
+	
+@bot.message_handler(func=lambda msg: msg.entities is not None)
+def delete_links(msg):
+    for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+        # url - обычная ссылка, text_link - ссылка, скрытая под текстом
+        if entity.type in ["url", "text_link"]: 
+            # Мы можем не проверять chat.id, он проверяется ещё в хэндлере 
+            bot.delete_message(msg.chat.id, msg.message_id)
+        else:
+            return
 
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
@@ -53,8 +64,8 @@ def antispam(msg):
 		textspam=msg.caption.lower()
 	else:
 		textspam=msg.text.lower()
-
-	if textspam is None or 'wa.me' in textspam or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
+#or 'dfdDFSSfdf444' in textspam
+	if textspam is None or len(textspam) < 4 or re.search('\d+', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
