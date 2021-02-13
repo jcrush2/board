@@ -23,10 +23,9 @@ def otzyv(msg):
 			
 		
 def antispam(msg):
+	textspam=msg.text.lower()
 	if msg.caption !=None:
 		textspam=msg.caption.lower()
-	else:
-		textspam=msg.text.lower()
 
 	if 'zwzff' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
