@@ -42,21 +42,7 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 	
 	
-@bot.message_handler(func=lambda msg: msg.entities is not None)
-def delete_links(msg):
-	for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-		if entity.type in ["url", "text_link"]: 
-			bot.delete_message(msg.chat.id, msg.message_id)
-		else:
-			return
-			
-@bot.message_handler(func=lambda msg: msg.caption_entities is not None, content_types=["photo"])
-def delete_links(msg):
-	for entity in msg.caption_entities:  # Пройдёмся по всем entities в поисках ссылок
-		if entity.type in ["url", "text_link"]: 
-			bot.delete_message(msg.chat.id, msg.message_id)
-		else:
-			return
+
 		
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
@@ -71,7 +57,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 #'4324324432' in textspam 
-	if textspam is None or len(textspam) < 4 or re.search(r'[0-9]+', textspam) == None:
+	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
