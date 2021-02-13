@@ -71,7 +71,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 #'4324324432' in textspam 
-	if textspam is None or len(textspam) < 4 or re.search(r'\d', textspam) == None:
+	if textspam is None or len(textspam) < 4 or re.findall(r'\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
