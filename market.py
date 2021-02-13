@@ -104,7 +104,10 @@ def karma_game(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		antispam(msg)
+		if msg.caption !=None:
+			antispam(msg)
+		else:
+			bot.delete_message(msg.chat.id, msg.message_id)
 		
 		
 @bot.message_handler(content_types=['video'])	
