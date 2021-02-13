@@ -64,10 +64,10 @@ def commands_media(msg):
 		commands_foto(msg)
 		
 def antispam(msg):
-	if msg.document.file_id !=None:
+	textspam=msg.text.lower()
+	if msg.caption !=None:
 		textspam=msg.caption.lower()
-	else:
-		textspam=msg.text.lower()
+
 
 	if textspam is None or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
