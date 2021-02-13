@@ -63,7 +63,7 @@ def commands_media(msg):
 	else:
 		commands_foto(msg)
 		
-def antispam(msg):
+def antispam(msg, text):
 	if msg.caption !=None:
 		textspam=msg.caption.lower()
 	else:
@@ -97,14 +97,14 @@ def karma_game(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		commands(msg, msg.text)
+		antispam(msg,text)
 	
 @bot.message_handler(content_types=['photo'])	
 def karma_game(msg):
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		commands_media(msg)
+		antispam(msg)
 		
 		
 @bot.message_handler(content_types=['video'])	
