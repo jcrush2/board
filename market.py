@@ -63,7 +63,7 @@ def commands_media(msg):
 	else:
 		commands_foto(msg)
 		
-def antispam(msg):
+def antispam(msg,textspam):
 
 	if textspam is None or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
@@ -108,7 +108,7 @@ def karma_game(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		textspam=msg.caption.lower()
-		antispam(msg)
+		antispam(msg,textspam)
 		
 
 # Дальнейший код используется для установки и удаления вебхуков
