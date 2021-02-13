@@ -50,7 +50,6 @@ def delete_links(msg):
 		else:
 			return
 
-
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
 	url_button = types.InlineKeyboardButton(text=f"Отзывы - {msg.from_user.first_name} 💬", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html")
@@ -63,8 +62,8 @@ def antispam(msg):
 		textspam=msg.caption.lower()
 	else:
 		textspam=msg.text.lower()
-#or 'dfdDFSSfdf444' in textspam
-	if textspam is None or len(textspam) < 4 or re.search('\d+', textspam) == None:
+
+	if textspam is None or 'wa.me' in textspam or 'www' in textspam or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
@@ -110,10 +109,7 @@ def karma_game(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		if msg.caption !=None:
-			if msg.caption in ["url", "text_link"]: 
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				antispam(msg)
+			antispam(msg)
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 		
