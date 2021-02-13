@@ -42,13 +42,7 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 	
 	
-@bot.message_handler(func=lambda msg: msg.entities is not None)
-def delete_links(msg):
-	for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-		if entity.type in ["url", "text_link"]: 
-			bot.delete_message(msg.chat.id, msg.message_id)
-		else:
-			return
+
 			
 @bot.message_handler(func=lambda msg: msg.caption_entities is not None)
 def delete_links(msg):
