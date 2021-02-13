@@ -67,25 +67,21 @@ def otzyv(msg):
 		
 def antispam(msg):
 	if msg.caption !=None:
+		for entity in msg.caption_entities:  # Пройдёмся по всем entities в поисках ссылок
+			if entity.type in ["url", "text_link"]: 
+				bot.delete_message(msg.chat.id, msg.message_id)
 		textspam=msg.caption.lower()
 	else:
 		textspam=msg.text.lower()
+		for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
+			if entity.type in ["url", "text_link"]: 
+				bot.delete_message(msg.chat.id, msg.message_id)
 
 	if textspam is None or 'zwzff' in textspam or len(textspam) < 4 or re.search('\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		if msg.caption !=None:
-			for entity in msg.caption_entities:  # Пройдёмся по всем entities в поисках ссылок
-				if entity.type in ["url", "text_link"]: 
-					bot.delete_message(msg.chat.id, msg.message_id)
-				else:
-					otzyv(msg)
-		else:
-			for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-				if entity.type in ["url", "text_link"]: 
-					bot.delete_message(msg.chat.id, msg.message_id)
-				else:
-					otzyv(msg)
+		otzyv(msg)
+
 
 def reply_exist(msg):
 	return msg.reply_to_message
