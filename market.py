@@ -41,27 +41,12 @@ def start(msg):
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
 
-def commands_foto(msg):        
+def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
 	url_button = types.InlineKeyboardButton(text=f"Отзывы - {msg.from_user.first_name} 💬", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html")
 	keyboard.add(url_button)
 	bot.reply_to(msg, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
 			
-def commands(msg, text):
-
-	if len(text) < 4 or re.search('\d+', msg.text.lower()) == None or 'http' in msg.text.lower() or 't.me' in msg.text.lower():
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		commands_foto(msg)
-#		if re.search(r'^(.*@[a-zA-Z0-9])|((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,10}',msg.text.lower())== None:
-#			bot.send_message(msg.chat.id, f"🗑 Объявление от <b>{msg.from_user.first_name}</b> удаленно, т.к. не содержит контактной информации. Для общения в свободной форме: @KhvChat", parse_mode="HTML")
-
-def commands_media(msg):
-
-	if msg.caption is None or 'http' in msg.caption.lower() or 't.me' in msg.caption.lower() or len(msg.caption) < 4 or re.search('\d+', msg.caption.lower()) == None:
-		bot.delete_message(msg.chat.id, msg.message_id)
-	else:
-		commands_foto(msg)
 		
 def antispam(msg):
 	if msg.caption !=None:
@@ -69,11 +54,10 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 
-
 	if textspam is None or 'http' in textspam or 't.me' in textspam or len(textspam) < 4 or re.search('\d+', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		commands_foto(msg)
+		otzyv(msg)
 
 def reply_exist(msg):
 	return msg.reply_to_message
