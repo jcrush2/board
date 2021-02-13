@@ -45,7 +45,7 @@ def start(msg):
 @bot.message_handler(func=lambda msg: msg.entities is not None)
 def delete_links(msg):
 	for entity in msg.entities:  # Пройдёмся по всем entities в поисках ссылок
-		if entity.caption in ["url", "text_link"]: 
+		if entity.type in ["url", "text_link"]: 
 			bot.delete_message(msg.chat.id, msg.message_id)
 		else:
 			return
@@ -110,7 +110,10 @@ def karma_game(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		if msg.caption !=None:
-			antispam(msg)
+			if msg.caption in ["url", "text_link"]: 
+				bot.delete_message(msg.chat.id, msg.message_id)
+			else:
+				antispam(msg)
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 		
