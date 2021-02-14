@@ -46,7 +46,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 		
-	if msg.chat.id =="-1001357839727":
+	if msg.chat.id ==-1001357839727:
 		bot.reply_to(msg, f"rrrrrrrrrr", parse_mode="HTML")
 	keywords = ("zwzff", "wa.me", "www", "http", "t.me", "www")
 	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None or any(word in textspam for word in keywords):
