@@ -31,6 +31,12 @@ bot = telebot.TeleBot(TELEGRAM_API)
 #			bot.delete_message(msg.chat.id, msg.message_id)
 #		else:
 #			return
+
+
+
+@bot.message_handler(func=lambda msg: msg.text is not None and msg.chat.id == -1001357839727)
+def delete_links(msg):
+	bot.reply_to(msg,f"🎉 Правильный ответ: +3 кармы, запустить игру /croco", parse_mode="HTML")
 		
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
