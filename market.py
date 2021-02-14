@@ -25,7 +25,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 	if msg.chat.id==-1001357839727:
-		keywords_work = ("работа", "ищу",)
+		keywords_work = ("рабо", "вакан","требу", "ищу", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп")
 		if any(word in textspam for word in keywords_work):
 			bot.send_chat_action(msg.chat.id, "typing")
 		else:
