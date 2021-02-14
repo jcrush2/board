@@ -25,7 +25,7 @@ def antispam(msg):
 	else:
 		textspam=msg.text.lower()
 	if 'id55' in msg.text.lower():
-		bot.send_message(msg.chat.id,f'🐊  загадал(а) свое слово.', parse_mode="HTML")
+		bot.send_message(msg.chat.id,f'🐊 {msg.chat.id} загадал(а) свое слово.', parse_mode="HTML")
 	keywords = ("zwzff", "wa.me", "www", "http", "t.me", "www")
 	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None or any(word in textspam for word in keywords):
 		bot.delete_message(msg.chat.id, msg.message_id)
