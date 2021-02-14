@@ -45,10 +45,12 @@ def antispam(msg):
 		textspam=msg.caption.lower()
 	else:
 		textspam=msg.text.lower()
+		
+	if msg.chat.id==-1001357839727:
+		bot.reply_to(msg, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
 	keywords = ("zwzff", "wa.me", "www", "http", "t.me", "www")
 	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None or any(word in textspam for word in keywords):
 		bot.delete_message(msg.chat.id, msg.message_id)
-
 	else:
 		otzyv(msg)
 		
