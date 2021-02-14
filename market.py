@@ -26,9 +26,7 @@ def antispam(msg):
 		textspam=msg.text.lower()
 	if msg.chat.id==-1001357839727:
 		keywords_work = ("работа", "ищу",)
-		if (word in textspam for word in keywords_work)!=False:
-			bot.send_chat_action(msg.chat.id, "typing")
-		else:
+		if False (word in textspam for word in keywords_work):
 			bot.delete_message(msg.chat.id, msg.message_id)
 
 	keywords = ("zwzff", "wa.me", "www", "http", "t.me", "www")
