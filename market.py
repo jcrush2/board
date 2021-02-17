@@ -58,10 +58,11 @@ def reply_text(msg):
 def antispam_text(msg):
 	if "url" in msg.entities:
 		bot.delete_message(msg.chat.id, msg.message_id)
-	if msg.forward_from_chat != None:
-		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		antispam(msg)
+		if msg.forward_from_chat != None:
+			bot.delete_message(msg.chat.id, msg.message_id)
+		else:
+			antispam(msg)
 	
 @bot.message_handler(content_types=['photo','video'])	
 def antispam_photo(msg):
