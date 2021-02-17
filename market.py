@@ -56,13 +56,15 @@ def reply_text(msg):
 
 @bot.message_handler(content_types=['text'])	
 def antispam_text(msg):
-	if "url" in msg.entities.type:
+	try:
+		if "url" in msg.entities:
+			bot.delete_message(msg.chat.id, msg.message_id)
+	except Exception:
+		bot.send_chat_action(msg.chat.id, "typing")
+	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
-		if msg.forward_from_chat != None:
-			bot.delete_message(msg.chat.id, msg.message_id)
-		else:
-			antispam(msg)
+		antispam(msg)
 	
 @bot.message_handler(content_types=['photo','video'])	
 def antispam_photo(msg):
