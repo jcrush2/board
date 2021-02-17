@@ -56,17 +56,8 @@ def reply_text(msg):
 
 @bot.message_handler(content_types=['text'])	
 def antispam_text(msg):
-	if msg.entities is not None or msg.caption_entities is not None:
-		for entity in msg.entities:
-			if msg.entities.type in ["url", "text_link"]:
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				return
-		for capentity in msg.caption_entities:
-			if capentity.type in ["url", "text_link"]:
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				return
+	if "url" in msg.entities:
+		bot.delete_message(msg.chat.id, msg.message_id)
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
