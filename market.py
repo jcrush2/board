@@ -45,7 +45,7 @@ def antispam(msg):
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 
-	keywords = ("zwzff", "wa.me", "www", "http", "t.me")
+	keywords = ("zwzff", "wa.me")
 	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None or any(word in textspam for word in keywords):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
