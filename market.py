@@ -27,6 +27,10 @@ def antispam(msg):
 	for entity in msg.entities:
 		if entity.type in ["url", "text_link"]:
 			bot.delete_message(msg.chat.id, msg.message_id)
+	for entity in msg.caption_entities:
+		if entity.type in ["url", "text_link"]:
+			bot.delete_message(msg.chat.id, msg.message_id)
+		
 	if msg.chat.id==-1001422750282:
 		keywords_work = ("рабо", "вакан","требу", "ищу", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп")
 		if any(word in textspam for word in keywords_work):
@@ -34,7 +38,7 @@ def antispam(msg):
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 
-	keywords = ("zwzff", "wa.me", "www", "http", "t.me", "www")
+	keywords = ("zwzff", "wa.me", "www", "http", "t.me")
 	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None or any(word in textspam for word in keywords):
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
