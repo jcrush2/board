@@ -24,17 +24,7 @@ def antispam(msg):
 		textspam=msg.caption.lower()
 	else:
 		textspam=msg.text.lower()
-	if msg.entities is not None or msg.caption_entities is not None:
-		for entity in msg.entities:
-			if msg.entities.type in ["url", "text_link"]:
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				return
-		for capentity in msg.caption_entities:
-			if capentity.type in ["url", "text_link"]:
-				bot.delete_message(msg.chat.id, msg.message_id)
-			else:
-				return
+
 	if msg.chat.id==-1001422750282:
 		keywords_work = ("рабо", "вакан","требу", "ищу", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп")
 		if any(word in textspam for word in keywords_work):
@@ -66,6 +56,17 @@ def reply_text(msg):
 
 @bot.message_handler(content_types=['text'])	
 def antispam_text(msg):
+	if msg.entities is not None or msg.caption_entities is not None:
+		for entity in msg.entities:
+			if msg.entities.type in ["url", "text_link"]:
+				bot.delete_message(msg.chat.id, msg.message_id)
+			else:
+				return
+		for capentity in msg.caption_entities:
+			if capentity.type in ["url", "text_link"]:
+				bot.delete_message(msg.chat.id, msg.message_id)
+			else:
+				return
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
