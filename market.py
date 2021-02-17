@@ -20,15 +20,15 @@ def otzyv(msg):
 		
 def antispam(msg):
 	try:
-		for entity in message.entities:
+		for entity in msg.entities:
 			if entity.type in ["url", "text_link"]:
-				bot.delete_message(message.chat.id, message.message_id)
+				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		bot.send_chat_action(msg.chat.id, "typing")
 	try:
-		for entityc in message.caption_entities:
+		for entityc in msg.caption_entities:
 			if entityc.type in ["url", "text_link"]:
-				bot.delete_message(message.chat.id, message.message_id)
+				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		bot.send_chat_action(msg.chat.id, "typing")
 
