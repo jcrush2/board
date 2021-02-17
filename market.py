@@ -27,9 +27,13 @@ def antispam(msg):
 	for entity in msg.entities:
 		if entity.type in ["url", "text_link"]:
 			bot.delete_message(msg.chat.id, msg.message_id)
-	for entity in msg.caption_entities:
-		if entity.type in ["url", "text_link"]:
+		else:
+			bot.send_chat_action(msg.chat.id, "typing")
+	for capentity in msg.caption_entities:
+		if capentity.type in ["url", "text_link"]:
 			bot.delete_message(msg.chat.id, msg.message_id)
+		else:
+			bot.send_chat_action(msg.chat.id, "typing")
 		
 	if msg.chat.id==-1001422750282:
 		keywords_work = ("рабо", "вакан","требу", "ищу", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп")
