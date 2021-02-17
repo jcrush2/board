@@ -19,6 +19,19 @@ def otzyv(msg):
 			
 		
 def antispam(msg):
+	try:
+		for entity in message.entities:
+			if entity.type in ["url", "text_link"]:
+				bot.delete_message(message.chat.id, message.message_id)
+	except Exception:
+		bot.send_chat_action(msg.chat.id, "typing")
+	try:
+		for entityc in message.caption_entities:
+			if entityc.type in ["url", "text_link"]:
+				bot.delete_message(message.chat.id, message.message_id)
+	except Exception:
+		bot.send_chat_action(msg.chat.id, "typing")
+
 				
 	if msg.caption !=None:
 		textspam=msg.caption.lower()
@@ -56,11 +69,6 @@ def reply_text(msg):
 
 @bot.message_handler(content_types=['text'])	
 def antispam_text(msg):
-	try:
-		if "url" in msg.entities:
-			bot.delete_message(msg.chat.id, msg.message_id)
-	except Exception:
-		bot.send_chat_action(msg.chat.id, "typing")
 	if msg.forward_from_chat != None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
