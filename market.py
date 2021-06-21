@@ -21,13 +21,13 @@ def otzyv(msg):
 def antispam(msg):
 	try:
 		for entity in msg.entities:
-			if entity.type in ["url", "text_link", "mention"]:
+			if entity.type in ["url", "text_link"]:
 				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		print("Error!")
 	try:
 		for entityc in msg.caption_entities:
-			if entityc.type in ["url", "text_link", "mention"]:
+			if entityc.type in ["url", "text_link"]:
 				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		print("Error!")
@@ -70,7 +70,7 @@ def reply_text(msg):
 @bot.message_handler(content_types=['text'])	
 def antispam_text(msg):
 	user = bot.get_chat_member(msg.chat.id, msg.from_user.id)
-	if user.status == 'creator'  :
+	if user.status == 'creator' or user.is_anonymous == True :
 		return
 	else:
 		if msg.forward_from_chat != None:
