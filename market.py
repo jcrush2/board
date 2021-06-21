@@ -71,7 +71,7 @@ def reply_text(msg):
 def antispam_text(msg):
 	user = bot.get_chat_member(msg.chat.id, msg.from_user.id)
 #	if user.status == 'creator':
-	if msg.reply_to_message.from_user.first_name == "Group":
+	if msg.from_user.first_name == "Group":
 		return
 	else:
 		if msg.forward_from_chat != None:
