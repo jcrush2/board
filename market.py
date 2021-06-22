@@ -23,7 +23,7 @@ def antispam(msg):
 		for entity in msg.entities:
 			if entity.type in ["url", "text_link"]:
 				bot.delete_message(msg.chat.id, msg.message_id)
-			if entity.type in ["mention"] != msg.from_user.username:
+			if entity[0].type in ["mention"] != msg.from_user.username:
 				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		print("Error!")
@@ -31,7 +31,7 @@ def antispam(msg):
 		for entityc in msg.caption_entities:
 			if entityc.type in ["url", "text_link"]:
 				bot.delete_message(msg.chat.id, msg.message_id)
-			if entityc.type in ["mention"] != msg.from_user.username:
+			if entityc[0].type in ["mention"] != msg.from_user.username:
 				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		print("Error!")
