@@ -23,9 +23,8 @@ def antispam(msg):
 		for entity in msg.entities:
 			if entity.type in ["url", "text_link"]:
 				bot.delete_message(msg.chat.id, msg.message_id)
-			if entity[0].type in ["mention"] != msg.from_user.username:
-				bot.delete_message(msg.chat.id, msg.message_id)
-			bot.reply_to(msg.reply_to_message,f"{msg.from_user.username}.... {entity[0].type in ['mention']}", parse_mode="HTML")
+			if entity.type in ["mention"]:
+				bot.reply_to(msg.reply_to_message,f"{msg.from_user.username}.... {entity.type in ['mention']}", parse_mode="HTML")
 	except Exception:
 		print("Error!")
 	try:
