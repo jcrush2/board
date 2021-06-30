@@ -19,12 +19,27 @@ def otzyv(msg):
 			
 		
 def antispam(msg):
+	if msg.caption !=None:
+		textspam=msg.caption.lower()
+	else:
+		textspam=msg.text.lower()
 	try:
 		for entity in msg.entities:
 			if entity.type in ["url", "text_link"]:
 				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		print("Error!")
+		
+	try:
+		for entity in msg.entities:
+			if entity.type in ["mention"]:
+				if msg.from_user.username.lower() in textspam:
+					print("ok!")
+				else:
+					bot.delete_message(msg.chat.id, msg.message_id)
+	except Exception:
+		print("Error!")
+		
 	try:
 		for entityc in msg.caption_entities:
 			if entityc.type in ["url", "text_link"]:
@@ -33,10 +48,7 @@ def antispam(msg):
 		print("Error!")
 
 				
-	if msg.caption !=None:
-		textspam=msg.caption.lower()
-	else:
-		textspam=msg.text.lower()
+
 
 	if msg.chat.id==-1001422750282:
 		keywords_work = ("рабо", "вакан","требу", "труд", "ищу", "занятост", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп", "приглаш")
