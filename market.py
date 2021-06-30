@@ -48,7 +48,7 @@ def antispam(msg):
 		print("Error!")
 		
 	try:
-		for entity in msg.caption_entities:
+		for entityc in msg.caption_entities:
 			if entityc.type in ["mention"]:
 				if msg.from_user.username.lower() in textspam:
 					print("ok!")
