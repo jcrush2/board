@@ -48,7 +48,7 @@ def antispam(msg):
 	keywords = ("zwzff", "wa.me")
 	if textspam is None or len(textspam) < 4 or re.search('\d', textspam) == None or any(word in textspam for word in keywords):
 		bot.delete_message(msg.chat.id, msg.message_id)
-	if "275O" in textspam:
+	if textspam in "275O":
 		bot.delete_message(msg.chat.id, msg.message_id)
 		bot.restrict_chat_member(msg.chat.id, msg.from_user.id, until_date=time()+86400)
 	else:
