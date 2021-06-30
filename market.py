@@ -46,6 +46,16 @@ def antispam(msg):
 				bot.delete_message(msg.chat.id, msg.message_id)
 	except Exception:
 		print("Error!")
+		
+	try:
+		for entity in msg.caption_entities:
+			if entityc.type in ["mention"]:
+				if msg.from_user.username.lower() in textspam:
+					print("ok!")
+				else:
+					bot.delete_message(msg.chat.id, msg.message_id)
+	except Exception:
+		print("Error!")
 
 				
 
