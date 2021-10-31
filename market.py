@@ -6,7 +6,7 @@ import re
 
 import telebot
 from telebot import types
-
+import config
 
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
