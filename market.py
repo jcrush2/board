@@ -66,7 +66,7 @@ def antispam(msg):
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 
-	if re.search('((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}', textspam) == None:
+	if re.search('/(?:\+|\d)[\d\-\(\) ]{9,}\d/g', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
