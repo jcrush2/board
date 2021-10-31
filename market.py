@@ -59,19 +59,16 @@ def antispam(msg):
 	except Exception:
 		print("Error!")
 
-				
 
-
+	if re.search('((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}', textspam) == None:
+		bot.delete_message(msg.chat.id, msg.message_id)
+		
 	if msg.chat.id==-1001422750282:
 		keywords_work = ("рабо", "вакан","требу", "труд", "ищу", "занятост", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп", "приглаш")
 		if any(word in textspam for word in keywords_work):
 			print("Error!")
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
-
-	keywords = ("zwzff", "wa.me","o₽","o0")
-	if textspam is None or len(textspam) < 4 or re.search('((8|\+7)[\- ]?)?(\(?\d{3}\)?[\-]?)?[\d\- ]{7,10}', textspam) == None or any(word in textspam for word in keywords):
-		bot.delete_message(msg.chat.id, msg.message_id)
 	else:
 		otzyv(msg)
 		
