@@ -64,8 +64,8 @@ def antispam(msg):
 		bot.delete_message(msg.chat.id, msg.message_id)
 		
 	if msg.chat.id==-1001422750282:
-		keywords_work = ("рабо", "вакан","требу", "труд", "ищу", "занятост", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп", "приглаш")
-		if not any(word in textspam for word in keywords_work):
+		keywords_work = ("рабо", "вакан","требу", "труд", "ищу", "занятост", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп", "приглаш", "карьер")
+		if any(word in textspam for word in keywords_work):
 			print("Error!")
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
