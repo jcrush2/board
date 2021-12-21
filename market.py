@@ -77,6 +77,8 @@ def antispam_media(msg):
 	else:
 		if msg.caption !=None:
 			antispam(msg)
+			if msg.media_group_id>=1:
+				return
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
 
