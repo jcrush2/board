@@ -12,10 +12,10 @@ TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 	
 def otzyv(msg):
-	nam=msg.from_user.first_name.replace('\"', '')
+	nam=msg.from_user.first_name.replace('"', '')
 	nam=nam.strip()
 	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text=f"💬 Оставить отзыв", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{name}")
+	url_button = types.InlineKeyboardButton(text=f"💬 Оставить отзыв", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{nam}")
 	
 	keyboard.add(url_button)
 	bot.reply_to(msg, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>', parse_mode="HTML", reply_markup=keyboard)
