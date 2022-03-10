@@ -13,10 +13,10 @@ bot = telebot.TeleBot(TELEGRAM_API)
 	
 def otzyv(msg):        
 	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text=f"💬 {msg.from_user.first_name}", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.from_user.first_name}")
+	url_button = types.InlineKeyboardButton(text=f"💬 Оставить отзыв", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.from_user.first_name}")
 	
 	keyboard.add(url_button)
-	bot.reply_to(msg, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+	bot.reply_to(msg, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>', parse_mode="HTML", reply_markup=keyboard)
 			
 		
 def antispam(msg):
@@ -81,6 +81,12 @@ def antispam_media(msg):
 
 def reply_exist(msg):
 	return msg.reply_to_message
+	
+
+@bot.message_handler(content_types=['document','video_note', "audio", "voice","contact","animation"])
+def handler_antispam(msg):
+
+	bot.delete_message(msg.chat.id, msg.message_id)
 
 @bot.message_handler(content_types=["text", "photo","video"], func=reply_exist)
 def reply_text(msg):
