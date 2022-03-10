@@ -62,14 +62,19 @@ def antispam(msg):
 		print("Error!")
 
 	if msg.chat.id==-1001422750282:
-		keywords_work = ("рабо", "вакан","требу", "труд", "ищу", "занятост", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп", "приглаш", "карьер")
+		keywords_work = ("рабо", "вакан","требу", "труд", "ищу", "занятост", "график","свобод", "зар", "плат", "услов", "опыт", "обязанн", "резюме", "нуж", "зп", "приглаш", "карьер","халтур","шабаш")
 		if any(word in textspam for word in keywords_work):
 			print("Error!")
 		else:
 			bot.delete_message(msg.chat.id, msg.message_id)
+			
 
 	if re.search('(?:\+|\d)[\d\-\(\) ]{9,}\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
+	spam = ("coin")
+	if any(word in textspam for word in spam):
+		bot.delete_message(msg.chat.id, msg.message_id)
+			
 	else:
 		otzyv(msg)
 		
@@ -90,6 +95,7 @@ def reply_exist(msg):
 def handler_antispam(msg):
 
 	bot.delete_message(msg.chat.id, msg.message_id)
+	return
 
 @bot.message_handler(content_types=["text", "photo","video"], func=reply_exist)
 def reply_text(msg):
