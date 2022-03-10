@@ -23,6 +23,8 @@ def otzyv(msg):
 			
 		
 def antispam(msg):
+	if msg.sender_chat:
+		bot.ban_chat_member(msg.chat.id, msg.sender_chat.id)
 	if msg.caption !=None:
 		textspam=msg.caption.lower()
 	else:
