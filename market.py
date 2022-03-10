@@ -72,8 +72,6 @@ def antispam(msg):
 	if re.search('(?:\+|\d)[\d\-\(\) ]{9,}\d', textspam) == None:
 		bot.delete_message(msg.chat.id, msg.message_id)
 
-	if set(['coin']) & set(textspam):
-		bot.delete_message(msg.chat.id, msg.message_id)
 			
 	else:
 		otzyv(msg)
