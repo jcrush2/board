@@ -15,7 +15,7 @@ def otzyv(msg):
 	nam=msg.from_user.first_name.replace('"', '')
 	nam=nam.replace('’', '')
 	nam=nam.strip()
-	nam=nam[0:20];
+	nam=nam[0:15];
 	keyboard = types.InlineKeyboardMarkup()
 	url_button = types.InlineKeyboardButton(text=f"💬 Оставить отзыв", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{nam}")
 	
