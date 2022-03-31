@@ -109,8 +109,9 @@ def antispam_text(msg):
 	if user.status == 'creator' or msg.from_user.first_name == "Group":
 		return
 	else:
-		if msg.forward_from_chat != None:
+		if msg.forward_from_chat:
 			bot.delete_message(msg.chat.id, msg.message_id)
+			return
 		else:
 			antispam(msg)
 	
